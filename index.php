@@ -295,7 +295,6 @@
 					do_backup(tamanos[i].nombre, tamanos[i].count, 0, 0, i);
 				}
 			}
-			setTimeout(function(){ actulizaGraficos(); }, 5000);
 		}	
 
 		function estructura(tabla){
