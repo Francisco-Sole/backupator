@@ -56,19 +56,12 @@ while ($rows = mysqli_fetch_row($result)){
 $script = substr($script, 0,-2);
 $script .= "\n";	
 
-if($archivo = fopen($nombre_archivo, "a"))
-{
-	fwrite($archivo, $script);
-	fclose($archivo);
-}
-
-// $zip = new ZipArchive;
-// $res = $zip->open($nombre_archivo.".zip", ZipArchive::CREATE);
-// if ($res === TRUE) {
-//     $zip->addFromString($nombre_archivo, $script);
-//     $zip->close();
-// } 
-	
+$zip = new ZipArchive;
+$res = $zip->open($nombre_archivo.".zip", ZipArchive::CREATE);
+if ($res === TRUE) {
+    $zip->addFromString($tabla.($current+1000), $script);
+    $zip->close();
+} 
 
 $response["tabla"] = $tabla;
 $response["count"] = $total_rows;

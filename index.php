@@ -102,6 +102,8 @@
 		var dataG2 = [0];
 		var labelsG1 = [];
 		var zipper = 0;
+		var maxTablasGrandes = 0;
+		var tablasGrandes = 0;
 
 		reloj();
 		dameTodasTablas();
@@ -310,7 +312,7 @@
 					$("#contador_struct").html(parseInt(parseInt(structDescargadas)));
 					$("#carga_struct").css("width", ((parseInt(structDescargadas)/parseInt(tablasLocal.length-1))*100+"%"));
 					if ((parseInt(structDescargadas)/parseInt(tablasLocal.length-1))*100 == 100) {
-						addToZipDDL("DDL-structure","DDL/structure");	
+						//addToZipDDL("DDL-structure","DDL/structure");	
 					}
 					
 				}
@@ -327,7 +329,7 @@
 					$("#contador_functions").html(data);
 					$("#contadorMAX_functions").html(data);
 					$("#carga_functions").css("width", "100%");
-					addToZipDDL("DDL-functions","DDL/functions");
+					//addToZipDDL("DDL-functions","DDL/functions");
 
 				}
 			});
@@ -343,7 +345,7 @@
 					$("#contador_procedures").html(data);
 					$("#contadorMAX_procedures").html(data);
 					$("#carga_procedures").css("width", "100%");
-					addToZipDDL("DDL-procedures","DDL/procedures");
+					//addToZipDDL("DDL-procedures","DDL/procedures");
 				}
 			});
 		}
@@ -380,7 +382,7 @@
 						$("#contador_"+data.tabla).html(data.count);
 						$("#carga_"+data.tabla).css("width", "100%");
 						$("#carga_"+data.tabla).attr("cargado", "100");
-						addToZip(tamanos[data.indice].nombre);
+						//addToZip(tamanos[data.indice].nombre);
 					}
 					actualizaDatos();
 				},
@@ -436,7 +438,8 @@
 							$("#contador_"+data.tabla).html(data.count);
 							$("#carga_"+data.tabla).css("width", "100%");
 							$("#carga_"+data.tabla).attr("cargado", "100");
-							addToZip(tamanos[data.indice].nombre);
+							//addToZip(tamanos[data.indice].nombre);
+							tablasGrandes++;
 						}
 					}
 					actualizaDatos();
@@ -495,9 +498,14 @@
 					if (parseInt(tamanos[i].tramos) <= 200) {
 						//nada
 					}else{
+						maxTablasGrandes++;
 						do_backupPartG(tamanos[i].nombre, tamanos[i].count, 0, 0, i);
 					}
 				}
+			}
+
+			if (primeraVez == true && oks >= numTablaPequenas && maxTablasGrandes == tablasGrandes) {
+				bajaZip();
 			}
 		}
 
