@@ -276,7 +276,7 @@
 
 			temporizadorGraficos = setInterval(function(){ 
 				actulizaGraficos();
-			}, 10000);
+			}, 5000);
 
 			//$("#info-log").append("--> Iniciando backup (Tablas pequeñas)...<br>");
 			
@@ -293,8 +293,6 @@
 					maxGlobalpequenas+=parseInt(tamanos[i].tramos);
 					numTablaPequenas++;
 					do_backup(tamanos[i].nombre, tamanos[i].count, 0, 0, i);
-				}else{
-					//do_backupPartG(tamanos[i].nombre, tamanos[i].count, 0, 0, i);
 				}
 			}
 			setTimeout(function(){ actulizaGraficos(); }, 5000);
@@ -312,7 +310,6 @@
 					$("#contador_struct").html(parseInt(parseInt(structDescargadas)));
 					$("#carga_struct").css("width", ((parseInt(structDescargadas)/parseInt(tablasLocal.length-1))*100+"%"));
 					if ((parseInt(structDescargadas)/parseInt(tablasLocal.length-1))*100 == 100) {
-						//addToZipDDL("DDL-structure","DDL/structure");	
 					}
 					
 				}
@@ -329,7 +326,6 @@
 					$("#contador_functions").html(data);
 					$("#contadorMAX_functions").html(data);
 					$("#carga_functions").css("width", "100%");
-					//addToZipDDL("DDL-functions","DDL/functions");
 
 				}
 			});
@@ -345,7 +341,6 @@
 					$("#contador_procedures").html(data);
 					$("#contadorMAX_procedures").html(data);
 					$("#carga_procedures").css("width", "100%");
-					//addToZipDDL("DDL-procedures","DDL/procedures");
 				}
 			});
 		}
@@ -382,7 +377,6 @@
 						$("#contador_"+data.tabla).html(data.count);
 						$("#carga_"+data.tabla).css("width", "100%");
 						$("#carga_"+data.tabla).attr("cargado", "100");
-						//addToZip(tamanos[data.indice].nombre);
 					}
 					actualizaDatos();
 				},
@@ -421,13 +415,7 @@
 					if (tamanos[data.indice].realizado[parseInt(data.variable)+10] == 0) {
 						do_backupG(tamanos[data.indice].nombre, tamanos[data.indice].count, data.current , parseInt(data.variable)+10, data.indice);
 					}
-					//else if (tamanos[data.indice].realizado[parseInt(data.variable)+1] == 0) {
-						//do_backup(tamanos[data.indice].nombre, tamanos[data.indice].count, data.current , parseInt(data.variable)+1, data.indice);
-					//}
 					else{
-						// $("#contador_"+data.tabla).html(data.count);
-						// $("#carga_"+data.tabla).css("width", "100%");
-						// $("#carga_"+data.tabla).attr("cargado", "100");
 						var estanBajadas2 = 0;
 						for (var i = 0; i < tamanos[data.indice].realizado.length; i++) {
 							if (tamanos[data.indice].realizado[i] == 1) {
@@ -438,7 +426,6 @@
 							$("#contador_"+data.tabla).html(data.count);
 							$("#carga_"+data.tabla).css("width", "100%");
 							$("#carga_"+data.tabla).attr("cargado", "100");
-							//addToZip(tamanos[data.indice].nombre);
 							tablasGrandes++;
 						}
 					}
@@ -476,7 +463,6 @@
 			var totalRegistros = Math.ceil(parseInt($("#totalfilas").html())/1000);
 
 			var porReg = (oksreg/totalRowsCalculos)*100;
-			//console.log(oksreg,totalRowsCalculos);
 			$("#porcentagefilas").html(porReg.toFixed(2)+"%");
 
 			var efec = (oksreg/(solicitudTramos))*100;
@@ -487,11 +473,9 @@
 				clearInterval(temporizadorGraficos);
 				$("#efectividad").html("100%");
 				console.log("Proceso finalizado.\nTiempo invertido: " + $("#lapso").html());
-				//alert("Codigo para bajar el ZIP");
 			}
 
 			if (primeraVez == false && (oks >= numTablaPequenas)) {
-				//alert("pipoip");
 				console.log("Tablas peuqeñas terminadas... Empieza Backup grande...");
 				primeraVez = true;
 				for (var i = 0; i < tamanos.length; i++) {
