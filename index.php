@@ -862,6 +862,16 @@
 			// 	}
 			// });	
 		}
+
+		//limpiara las carpetas de trabajo.
+		function reset(){
+			$.ajax({
+				url: 'resetWP.php',
+				success: function (data) {
+					console.log("Borrado con exito...");
+				}
+			});	
+		}
 		
 
 	</script>
@@ -886,6 +896,7 @@
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Lapso: </b><span id="lapso"></span></div>
 		<div id="info-boton" style="display: none; width: 98%; margin-bottom: 10px; margin-left: 10px;margin-top: 10px">
 			<input type="button" id="backup" name="backup" value="BACKUP!"  style="padding: 5px;width: 200px;float: right;cursor: pointer;" onclick="backup();">
+			<input type="button" id="reset" name="reset" value="RESET"  style="padding: 5px;width: 100px;float: right;cursor: pointer;" onclick="reset();">
 		</div>
 	</div>
 	
