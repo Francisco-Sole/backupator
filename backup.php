@@ -31,7 +31,7 @@ if(!is_dir($path)){
 
 $script = "";
 
-$nombre_archivo = "$path/$tabla " . ($current+1000) . ".sql"; 
+$nombre_archivo = "$path/$tabla " . ($current+1000); 
 $numArchivo++;
 
 $consulta = "select * from $tabla limit ". $current ." , ". 1000;
@@ -59,7 +59,7 @@ $script .= "\n";
 $zip = new ZipArchive;
 $res = $zip->open($nombre_archivo.".zip", ZipArchive::CREATE);
 if ($res === TRUE) {
-    $zip->addFromString($tabla.($current+1000), $script);
+    $zip->addFromString($tabla.($current+1000).".sql", $script);
     $zip->close();
 } 
 
