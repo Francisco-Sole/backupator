@@ -274,9 +274,7 @@
 				
 			}, 1000);
 
-			temporizadorGraficos = setInterval(function(){ 
-				actulizaGraficos();
-			}, 5000);
+			
 
 			//$("#info-log").append("--> Iniciando backup (Tablas pequeñas)...<br>");
 			
@@ -295,6 +293,10 @@
 					do_backup(tamanos[i].nombre, tamanos[i].count, 0, 0, i);
 				}
 			}
+
+			temporizadorGraficos = setInterval(function(){ 
+				actulizaGraficos();
+			}, 5000);
 		}	
 
 		function estructura(tabla){
@@ -624,29 +626,34 @@
 
 
 		function creargrafico2(){
-			
+			dataG1.push(0);
+			dataG2.push(0);
+
 			var config = {
 				type: 'line',
 				data: {
 					datasets: [{
+						lineTension: 0,
 						data: dataG1,
 						backgroundColor: "#00BCEB",
 						borderColor: "#00BCEB",
 						fill: false,
-						pointRadius: '0',
+						pointRadius: '0.5',
 						label: "Num. Peticiones",
 					},
 					{
+						lineTension: 0,
 						data: dataG2,
 						backgroundColor: "#FFC335",
 						borderColor: "#FFC335",
 						fill: false,
-						pointRadius: '0',
+						pointRadius: '0.5',
 						label: "Num. Tramos descargados",  
 					}],
 					labels: labelsG1
 				},
 				options: {
+					bezierCurve: false,
 					legend:{
 						display: false,
 					},
