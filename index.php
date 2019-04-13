@@ -880,6 +880,14 @@
 		}
 		
 
+		$("#btn_menu").hover(function() {
+			//entra
+			//animacion de rellenado!
+		}, function() {
+			//sale
+			//animacion de salida.
+		});
+
 	</script>
 
 	<div id="info-cargando" style="display: block;position: fixed;width: 100%; height: 100%; font-weight: 900;background-color: rgba(0,0,0,0.3); z-index: 9999;">
@@ -891,7 +899,12 @@
 		</div>
 	</div>
 	<div id="info-tablas" style="position: fixed;width: 100%;padding-bottom: 10px;border-bottom: 1px solid black;background-color: white;z-index: 1;height: 41px;" class="sombra">
-		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-left: 48px; margin-top: 10px;"><b>Total tablas: </b><span id="totalTablas"></span></div>
+		<div style="margin-left: 5px; float: left;margin-right: 5px;">
+			<div style="border-radius: 50%; width: 35px; height: 35px; background-color: transparent ;margin-top: 8px;">
+				<img id="btn_menu" src="menu.png" alt="icono de menu." height="25px;" style="margin-top: 5px; margin-left: 5.5px;">	
+			</div>
+		</div>
+		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Total tablas: </b><span id="totalTablas"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Tablas sin registros: </b><span id="totalTablas0registros"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>% Tablas descargadas: </b><span id="porcentageTablas"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Total filas: </b><span id="totalfilas"></span></div>
