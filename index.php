@@ -890,7 +890,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="info-tablas" style="position: fixed;width: 100%;padding-bottom: 10px;border-bottom: 1px solid black;background-color: white;z-index: 1;" class="sombra">
+	<div id="info-tablas" style="position: fixed;width: 100%;padding-bottom: 10px;border-bottom: 1px solid black;background-color: white;z-index: 1;height: 41px;" class="sombra">
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-left: 48px; margin-top: 10px;"><b>Total tablas: </b><span id="totalTablas"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Tablas sin registros: </b><span id="totalTablas0registros"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>% Tablas descargadas: </b><span id="porcentageTablas"></span></div>
@@ -901,7 +901,7 @@
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Hora fin: </b><span id="horaF"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Lapso: </b><span id="lapso"></span></div>
 		<div id="info-boton" style="display: none; width: 98%; margin-bottom: 10px; margin-left: 10px;margin-top: 10px">
-			<input type="button" id="backup" name="backup" value="BACKUP!"  style="padding: 5px;width: 200px;float: right;cursor: pointer;" onclick="backup();">
+			<input type="button" id="backup" name="backup" value="BACKUP!"  style="padding: 5px;width: 100px;float: right;cursor: pointer;margin-left: 10px;" onclick="backup();">
 			<input type="button" id="reset" name="reset" value="RESET"  style="padding: 5px;width: 100px;float: right;cursor: pointer;" onclick="reset();">
 		</div>
 	</div>
