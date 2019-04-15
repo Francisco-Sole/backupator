@@ -879,13 +879,24 @@
 			});	
 		}
 		
+		$(document).ready(function() {
+			$("#redondo_btn_menu").hover(function() {
 
-		$("#btn_menu").hover(function() {
-			//entra
-			//animacion de rellenado!
-		}, function() {
-			//sale
-			//animacion de salida.
+				$("#redondo_btn_menu").css({
+					"-webkit-box-shadow":"inset 0px 0px 0px 16px rgba(0,0,0,0.1)",
+					"-moz-box-shadow":"inset 0px 0px 0px 16px rgba(0,0,0,0.1)",
+					"box-shadow":"inset 0px 0px 0px 16px rgba(0,0,0,0.1)",
+					"transition": "box-shadow 0.4s"
+				})
+			}, function() {
+				$("#redondo_btn_menu").css({
+					"-webkit-box-shadow":"inset 0px 0px 0px 0px rgba(0,0,0,0.1)",
+					"-moz-box-shadow":"inset 0px 0px 0px 0px rgba(0,0,0,0.1)",
+					"box-shadow":"inset 0px 0px 0px 16px 0(0,0,0,0.1)",
+					"transition": "box-shadow 0.4s"
+				})
+			});
+
 		});
 
 	</script>
@@ -899,8 +910,8 @@
 		</div>
 	</div>
 	<div id="info-tablas" style="position: fixed;width: 100%;padding-bottom: 10px;border-bottom: 1px solid black;background-color: white;z-index: 1;height: 41px;" class="sombra">
-		<div style="margin-left: 5px; float: left;margin-right: 5px;">
-			<div style="border-radius: 50%; width: 35px; height: 35px; background-color: transparent ;margin-top: 8px;">
+		<div id="div_redondo_btn_menu" style="margin-left: 5px; float: left;margin-right: 5px;width: 35px;height: 35px;">
+			<div id="redondo_btn_menu" style="border-radius: 50%; width: 100%; height: 100%;margin-top: 8px;">
 				<img id="btn_menu" src="menu.png" alt="icono de menu." height="25px;" style="margin-top: 5px; margin-left: 5.5px;">	
 			</div>
 		</div>
