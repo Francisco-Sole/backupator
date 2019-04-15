@@ -64,6 +64,15 @@
 			border-radius: 15px;
 		}
 
+		.selectable{
+			cursor: pointer;
+			padding: 5px;
+		}
+
+		.selectable:hover{
+			background-color: rgba(0,0,0,0.1);
+		}
+
 	</style>
 </head>
 <body style="margin:0; padding: 0; border:0; width: 100%;overflow-x: hidden;">
@@ -880,6 +889,7 @@
 		}
 		
 		$(document).ready(function() {
+			//sombra boton menu (redondo)
 			$("#redondo_btn_menu").hover(function() {
 
 				$("#redondo_btn_menu").css({
@@ -897,6 +907,28 @@
 				})
 			});
 
+			//evento click boton menu
+			$("#btn_menu").click(function(event) {
+				//cambiamos el icono por el de cerrar (X)
+				$(this).hide();
+				$("#btn_menu_close").show();
+				$("#btn_menu_opciones").show();
+				var html = "<div>";
+				html += "<div id_menu='0' class='selectable'>Configurar conexión</div>";
+				html += "<div id_menu='1' class='selectable'>Configuracion general</div>";
+				html += "<div id_menu='2' class='selectable'>Densisdad de visualizado</div>";
+				html += "<div id_menu='3' class='selectable'>LOG</div>";
+				html += "<div class='estetico'><hr></div>";
+				html += "<div id_menu='4' class='selectable'>Idioma</div>";
+				html += "</div>";
+				$("#btn_menu_opciones").html(html);
+			});
+
+			$("#btn_menu_close").click(function(event){
+				$(this).hide();
+				$("#btn_menu").show();
+				$("#btn_menu_opciones").hide();
+			})
 		});
 
 	</script>
@@ -912,9 +944,11 @@
 	<div id="info-tablas" style="position: fixed;width: 100%;padding-bottom: 10px;border-bottom: 1px solid black;background-color: white;z-index: 1;height: 41px;" class="sombra">
 		<div id="div_redondo_btn_menu" style="margin-left: 5px; float: left;margin-right: 5px;width: 35px;height: 35px;">
 			<div id="redondo_btn_menu" style="border-radius: 50%; width: 100%; height: 100%;margin-top: 8px;">
-				<img id="btn_menu" src="menu.png" alt="icono de menu." height="25px;" style="margin-top: 5px; margin-left: 5.5px;">	
+				<img id="btn_menu" src="menu.png" alt="icono de menu." height="25px;" style="margin-top: 5px; margin-left: 5.5px;cursor: pointer">
+				<img id="btn_menu_close" src="cerrar.png" alt="icono de menu cerrar." height="25px;" style="margin-top: 5px; margin-left: 5.5px;cursor: pointer; display: none">	
 			</div>
 		</div>
+		<div id="btn_menu_opciones" style="display: none;float: left;background-color: white;width: calc(100% - 20px);top: 52px; padding: 10px;position: fixed;box-shadow: 3px 3px 4pc #000;-webkit-box-shadow: 3px 3px 4px #000;-moz-box-shadow: 3px 3px 4px #000;"></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Total tablas: </b><span id="totalTablas"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Tablas sin registros: </b><span id="totalTablas0registros"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>% Tablas descargadas: </b><span id="porcentageTablas"></span></div>
