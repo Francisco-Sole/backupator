@@ -916,10 +916,11 @@
 				var html = "<div>";
 				html += "<div id_menu='0' class='selectable'>Configurar conexión</div>";
 				html += "<div id_menu='1' class='selectable'>Configuración general</div>";
-				html += "<div id_menu='2' class='selectable'>Densidad de visual</div>";
-				html += "<div id_menu='3' class='selectable'>LOG</div>";
+				html += "<div id_menu='2' class='selectable'>Configuración de graficos</div>";
+				html += "<div id_menu='3' class='selectable'>Densidad de visual</div>";
+				html += "<div id_menu='4' class='selectable'>LOG</div>";
 				html += "<div class='estetico'><hr></div>";
-				html += "<div id_menu='4' class='selectable'>Idioma</div>";
+				html += "<div id_menu='5' class='selectable'>Idioma</div>";
 				html += "</div>";
 				$("#btn_menu_opciones").html(html);
 			});
