@@ -912,11 +912,11 @@
 				//cambiamos el icono por el de cerrar (X)
 				$(this).hide();
 				$("#btn_menu_close").show();
-				$("#btn_menu_opciones").show();
+				$("#btn_menu_opciones").show("blind");
 				var html = "<div>";
 				html += "<div id_menu='0' class='selectable'>Configurar conexión</div>";
-				html += "<div id_menu='1' class='selectable'>Configuracion general</div>";
-				html += "<div id_menu='2' class='selectable'>Densisdad de visualizado</div>";
+				html += "<div id_menu='1' class='selectable'>Configuración general</div>";
+				html += "<div id_menu='2' class='selectable'>Densidad de visual</div>";
 				html += "<div id_menu='3' class='selectable'>LOG</div>";
 				html += "<div class='estetico'><hr></div>";
 				html += "<div id_menu='4' class='selectable'>Idioma</div>";
@@ -927,7 +927,7 @@
 			$("#btn_menu_close").click(function(event){
 				$(this).hide();
 				$("#btn_menu").show();
-				$("#btn_menu_opciones").hide();
+				$("#btn_menu_opciones").hide("blind");
 			})
 		});
 
