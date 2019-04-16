@@ -283,7 +283,6 @@
 				
 			}, 1000);
 
-			
 
 			//$("#info-log").append("--> Iniciando backup (Tablas pequeñas)...<br>");
 			
