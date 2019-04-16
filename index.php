@@ -612,7 +612,7 @@
 				$("#contenidoBBDD1").append(html);	
 			}
 
-			//creargrafico1();
+			creargrafico1();
 			creargrafico2();
 
 		}
@@ -707,10 +707,10 @@
 			var dataTablas = [0,100];
 			var dataRows = [0,100];
 			var dataTotal = [0,100];
-			var colors1 = ["#1AC1F0","transparent"];
-			var colors2 = ["#FFC335","transparent"];
-			var colors3 = ["#EA7777","transparent"];
-			var borders =["black"];
+			var colors1 = ["#1AC1F0", "#FFF"];
+			var colors2 = ["#FFC335", "#FFF"];
+			var colors3 = ["#EA7777", "#FFF"];
+			var borders =["black","black"];
 			var labels = ["Tablas", "Filas", "Total"];
 
 			var config = {
@@ -722,19 +722,26 @@
 						backgroundColor: colors1,
 						borderColor: "black",
 						borderWidth: 1,
-						hiddenLegend: true,
+						labels: ["Descarga de total (%)","Pendiente"]
+						//hiddenLegend: true,
 					},{
 						data: dataRows,
 						backgroundColor: colors2,
 						borderColor: "black",
 						borderWidth: 1,
-						hiddenLegend: true,
+						labels: ["Descarga de filas (%)","Pendiente"]
+						
+						
+						//hiddenLegend: true,
 					},{
 						data: dataTablas,
 						backgroundColor: colors3,
 						borderColor: "black",
 						borderWidth: 1,
-						hiddenLegend: true,
+						labels: ["Descarga tablas (%)","Pendiente"]
+						
+						
+						//hiddenLegend: true,
 					},
 
 					],
@@ -742,15 +749,53 @@
 
 				},
 				options: {
+
+					showAllTooltips: true,
+					legendCallback: function(chart) {
+						var text = [];
+						var legs = [];
+						for( var j=0; j<chart.data.datasets.length;j++)
+						{
+							for (var i = 0; i < chart.data.datasets[j].data.length; i++) 
+							{
+								var newd = { label: chart.data.datasets[j].labels[i] , color: chart.data.datasets[j].backgroundColor[i]  };
+
+								if( !containsObject (newd,legs) )
+								{
+									legs.push(newd);
+								}          
+							} 
+						}
+
+						text.push('<ul class="Mylegend ' + chart.id + '-legend">');
+						for( var k =0;k<legs.length;k++)
+						{
+							text.push('<li><span style="background-color:' + legs[k].color + '"></span>');
+							text.push(legs[k].label);
+							text.push('</li>');    
+						}    
+						text.push('</ul>');
+						return text.join("");
+					},  
+
 					legend:{
 						display: false
 					},tooltips: {
-						enabled: false
+						//enabled: false
+
+						callbacks: {
+							label: function(tooltipItem, data) {
+								var dataset = data.datasets[tooltipItem.datasetIndex];
+								var index = tooltipItem.index;
+								return dataset.labels[index] + ': ' + dataset.data[index];
+							}
+						}
+
 					},
 					maintainAspectRatio: true,
 					responsive: false,
 					cutoutPercentage: 50,
-					showTooltips: false,
+					//showTooltips: false,
 					animation: false
 				}
 			};
@@ -759,17 +804,17 @@
 		}
 
 		function actulizaGraficos(){
-			// myChart.data.datasets[2].data[0] = parseInt($("#porcentageTablas").html());
-			// myChart.data.datasets[2].data[1] = 100-parseInt($("#porcentageTablas").html());
+			myChart.data.datasets[2].data[0] = parseInt($("#porcentageTablas").html());
+			myChart.data.datasets[2].data[1] = 100-parseInt($("#porcentageTablas").html());
 			
-			// myChart.data.datasets[1].data[0] = parseInt($("#porcentagefilas").html());
-			// myChart.data.datasets[1].data[1] = 100-parseInt($("#porcentagefilas").html());
+			myChart.data.datasets[1].data[0] = parseInt($("#porcentagefilas").html());
+			myChart.data.datasets[1].data[1] = 100-parseInt($("#porcentagefilas").html());
 			
-			// myChart.data.datasets[0].data[0] = (parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
-			// myChart.data.datasets[0].data[1] = 100-(parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
+			myChart.data.datasets[0].data[0] = (parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
+			myChart.data.datasets[0].data[1] = 100-(parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
 			
-			// //$("#leyenda1").html(myChart.generateLegend());
-			// myChart.update();
+			//$("#leyenda1").html(myChart.generateLegend());
+			myChart.update();
 
 			var d1 = new Date();
 			var hora1 = d1.getHours();
@@ -974,13 +1019,13 @@
 		</div>
 	</div>
 
-	<!-- <div style="float: left; width: 100%;margin-top: 70px;">
+	<div style="float: left; width: 100%;margin-top: 70px;">
 		<canvas id="canvasResumen" style="float: left; height: 250px; width: 250px;margin-left: 50px;">
 		</canvas>
 		<div id="leyenda1" style="float: left;width: 100px;" class="legend">
 			
 		</div>
-	</div> -->
+	</div>
 
 	<div id="contenido00" style="float: left; width: 100%;margin-top: 15px;"></div>
 	<div id="contenido0" style="float: left; width: 100%;margin-top: 15px;"></div>
