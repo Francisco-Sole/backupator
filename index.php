@@ -305,6 +305,11 @@
 			temporizadorGraficos = setInterval(function(){ 
 				actulizaGraficos();
 			}, 5000);
+
+			temporizadorGraficos1 = setInterval(function(){ 
+				actualizaGrafico1();
+			}, 1000);
+			
 		}	
 
 		function estructura(tabla){
@@ -480,6 +485,8 @@
 			if ( porcentaje == 100 && porReg >= 100 ) {
 				clearInterval(temporizadoFinal);
 				clearInterval(temporizadorGraficos);
+				clearInterval(temporizadorGraficos1);
+
 				$("#efectividad").html("100%");
 				console.log("Proceso finalizado.\nTiempo invertido: " + $("#lapso").html());
 			}
@@ -497,7 +504,20 @@
 				}
 			}
 
+			var numero_porcentaje_grafico = (parseFloat($("#porcentageTablas").html())+parseFloat($("#porcentagefilas").html()))/2;
+			$("#numProgreso").html(numero_porcentaje_grafico.toFixed(2) + "%");
+
 			if (primeraVez == true && oks >= numTablaPequenas && maxTablasGrandes == tablasGrandes) {
+				myChart.data.datasets[2].data[0] = parseInt($("#porcentageTablas").html());
+				myChart.data.datasets[2].data[1] = 100-parseInt($("#porcentageTablas").html());
+
+				myChart.data.datasets[1].data[0] = parseInt($("#porcentagefilas").html());
+				myChart.data.datasets[1].data[1] = 100-parseInt($("#porcentagefilas").html());
+
+				myChart.data.datasets[0].data[0] = (parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
+				myChart.data.datasets[0].data[1] = 100-(parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
+
+				myChart.update();
 				bajaZip();
 			}
 		}
@@ -719,15 +739,15 @@
 					{
 						data: dataTotal,
 						backgroundColor: colors1,
-						borderColor: "black",
-						borderWidth: 1,
+						// borderColor: "black",
+						// borderWidth: 1,
 						labels: ["Descarga de total (%)","Pendiente"]
 						//hiddenLegend: true,
 					},{
 						data: dataRows,
 						backgroundColor: colors2,
-						borderColor: "black",
-						borderWidth: 1,
+						// borderColor: "black",
+						// borderWidth: 1,
 						labels: ["Descarga de filas (%)","Pendiente"]
 						
 						
@@ -735,8 +755,8 @@
 					},{
 						data: dataTablas,
 						backgroundColor: colors3,
-						borderColor: "black",
-						borderWidth: 1,
+						// borderColor: "black",
+						// borderWidth: 1,
 						labels: ["Descarga tablas (%)","Pendiente"]
 						
 						
@@ -802,7 +822,7 @@
 			myChart = new Chart(ctx,config);
 		}
 
-		function actulizaGraficos(){
+		function actualizaGrafico1(){
 			myChart.data.datasets[2].data[0] = parseInt($("#porcentageTablas").html());
 			myChart.data.datasets[2].data[1] = 100-parseInt($("#porcentageTablas").html());
 			
@@ -812,9 +832,11 @@
 			myChart.data.datasets[0].data[0] = (parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
 			myChart.data.datasets[0].data[1] = 100-(parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
 			
-			//$("#leyenda1").html(myChart.generateLegend());
 			myChart.update();
+		}
 
+		function actulizaGraficos(){
+			
 			var d1 = new Date();
 			var hora1 = d1.getHours();
 			var min1 = d1.getMinutes();
@@ -1011,19 +1033,22 @@
 	
 
 	<div style="float: left; width: 100%;margin-top: 70px;">
-		<canvas id="canvasPeticiones" style="float: left; height: 250px; width: calc(100% - 50px);margin-left: 50px;">
+		<canvas id="canvasPeticiones" style="float: left; height: 250px; width: calc(100% - 350px);margin-left: 25px;">
 		</canvas>
+		<canvas id="canvasResumen" style="float: left; height: 250px; width: 250px;margin-left: 50px; border: 1px solid black">
+		</canvas>
+
 		<div id="leyenda2" style="float: left;width: 100%;" class="legend">
 			
 		</div>
+		
+	</div>
+	<div id="numProgreso" style="width: 130px;float:left;position: absolute; margin-left: calc(100% - 216px);margin-top:182px;text-align: center;font-size: 30px;">
+		0.00%
 	</div>
 
 	<div style="float: left; width: 100%;margin-top: 70px;">
-		<canvas id="canvasResumen" style="float: left; height: 250px; width: 250px;margin-left: 50px;">
-		</canvas>
-		<div id="leyenda1" style="float: left;width: 100px;" class="legend">
-			
-		</div>
+		
 	</div>
 
 	<div id="contenido00" style="float: left; width: 100%;margin-top: 15px;"></div>
