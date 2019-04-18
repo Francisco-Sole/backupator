@@ -5,7 +5,7 @@
 // $pasword_C = '';
 
 $host_C = '10.2.232.18';
-$nombreDeBaseDeDatos_C = 'BDInformes';
+$nombreDeBaseDeDatos_C = 'modulocliente';
 $usuario_C = 'franc';
 $pasword_C = 'capsulecorp';
 ?>

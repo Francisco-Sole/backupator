@@ -308,7 +308,7 @@
 
 			temporizadorGraficos1 = setInterval(function(){ 
 				actualizaGrafico1();
-			}, 1000);
+			}, 2000);
 			
 		}	
 
@@ -721,14 +721,14 @@
 			$("#leyenda2").html(myChart2.generateLegend());
 		}
 
-		function creargrafico1(){
 
+		function creargrafico1(){
 			var dataTablas = [0,100];
 			var dataRows = [0,100];
 			var dataTotal = [0,100];
-			var colors1 = ["#1AC1F0", "#FFF"];
-			var colors2 = ["#FFC335", "#FFF"];
-			var colors3 = ["#EA7777", "#FFF"];
+			var colors1 = ["#1AC1F0", "#d1d1d1"];
+			var colors2 = ["#FFC335", "#d1d1d1"];
+			var colors3 = ["#EA7777", "#d1d1d1"];
 			var borders =["black","black"];
 			var labels = ["Tablas", "Filas", "Total"];
 
@@ -741,14 +741,14 @@
 						backgroundColor: colors1,
 						// borderColor: "black",
 						// borderWidth: 1,
-						labels: ["Descarga de total (%)","Pendiente"]
+						labels: ["Descarga Total (%)","Pendiente Total (%)"]
 						//hiddenLegend: true,
 					},{
 						data: dataRows,
 						backgroundColor: colors2,
 						// borderColor: "black",
 						// borderWidth: 1,
-						labels: ["Descarga de filas (%)","Pendiente"]
+						labels: ["Descarga Filas (%)","Pendiente Filas (%)"]
 						
 						
 						//hiddenLegend: true,
@@ -757,7 +757,7 @@
 						backgroundColor: colors3,
 						// borderColor: "black",
 						// borderWidth: 1,
-						labels: ["Descarga tablas (%)","Pendiente"]
+						labels: ["Descarga Tablas (%)","Pendiente Tablas (%)"]
 						
 						
 						//hiddenLegend: true,
@@ -815,7 +815,7 @@
 					responsive: false,
 					cutoutPercentage: 50,
 					//showTooltips: false,
-					animation: false
+					animation: false,
 				}
 			};
 			var ctx = document.getElementById('canvasResumen').getContext('2d');
@@ -825,18 +825,18 @@
 		function actualizaGrafico1(){
 			myChart.data.datasets[2].data[0] = parseInt($("#porcentageTablas").html());
 			myChart.data.datasets[2].data[1] = 100-parseInt($("#porcentageTablas").html());
-			
+
 			myChart.data.datasets[1].data[0] = parseInt($("#porcentagefilas").html());
 			myChart.data.datasets[1].data[1] = 100-parseInt($("#porcentagefilas").html());
-			
+
 			myChart.data.datasets[0].data[0] = (parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
 			myChart.data.datasets[0].data[1] = 100-(parseInt($("#porcentageTablas").html())+parseInt($("#porcentagefilas").html()))/2;
-			
+
 			myChart.update();
 		}
 
 		function actulizaGraficos(){
-			
+
 			var d1 = new Date();
 			var hora1 = d1.getHours();
 			var min1 = d1.getMinutes();
@@ -913,7 +913,7 @@
 				data: datos,
 				type: 'GET',
 				success: function (data) {
-					
+
 				},
 				dataType : 'JSON'
 			});
@@ -1035,7 +1035,7 @@
 	<div style="float: left; width: 100%;margin-top: 70px;">
 		<canvas id="canvasPeticiones" style="float: left; height: 250px; width: calc(100% - 350px);margin-left: 25px;">
 		</canvas>
-		<canvas id="canvasResumen" style="float: left; height: 250px; width: 250px;margin-left: 50px; border: 1px solid black">
+		<canvas id="canvasResumen" style="float: left; height: 250px; width: 250px;margin-left: 50px; border: 1px solid silver">
 		</canvas>
 
 		<div id="leyenda2" style="float: left;width: 100%;" class="legend">
