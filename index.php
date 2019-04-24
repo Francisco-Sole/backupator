@@ -815,7 +815,7 @@
 					responsive: false,
 					cutoutPercentage: 50,
 					//showTooltips: false,
-					animation: false,
+					//animation: false,
 				}
 			};
 			var ctx = document.getElementById('canvasResumen').getContext('2d');
@@ -978,7 +978,6 @@
 				//cambiamos el icono por el de cerrar (X)
 				$(this).hide();
 				$("#btn_menu_close").show();
-				$("#btn_menu_opciones").show("blind");
 				var html = "<div>";
 				html += "<div id_menu='0' class='selectable'>Configurar conexión</div>";
 				html += "<div id_menu='1' class='selectable'>Configuración general</div>";
@@ -989,6 +988,7 @@
 				html += "<div id_menu='5' class='selectable'>Idioma</div>";
 				html += "</div>";
 				$("#btn_menu_opciones").html(html);
+				$("#btn_menu_opciones").show("blind");
 			});
 
 			$("#btn_menu_close").click(function(event){
@@ -1015,7 +1015,8 @@
 				<img id="btn_menu_close" src="cerrar.png" alt="icono de menu cerrar." height="25px;" style="margin-top: 5px; margin-left: 5.5px;cursor: pointer; display: none">	
 			</div>
 		</div>
-		<div id="btn_menu_opciones" style="display: none;float: left;background-color: white;width: calc(100% - 20px);top: 52px; padding: 10px;position: fixed;box-shadow: 3px 3px 4pc #000;-webkit-box-shadow: 3px 3px 4px #000;-moz-box-shadow: 3px 3px 4px #000;"></div>
+		<div id="btn_menu_opciones" style="display:none;float: left;background-color: white;width: calc(100% - 20px);top: 52px; padding: 10px;position: fixed;box-shadow: 3px 3px 4px #000;-webkit-box-shadow: 3px 3px 4px #000;-moz-box-shadow: 3px 3px 4px #000;">
+		</div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Total tablas: </b><span id="totalTablas"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Tablas sin registros: </b><span id="totalTablas0registros"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>% Tablas descargadas: </b><span id="porcentageTablas"></span></div>
@@ -1025,17 +1026,14 @@
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Hora inicio: </b><span id="horaI"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Hora fin: </b><span id="horaF"></span></div>
 		<div style="border: 1px solid black; float: left;margin-right: 5px;padding: 5px; margin-top: 10px;"><b>Lapso: </b><span id="lapso"></span></div>
-		<div id="info-boton" style="display: none; width: 98%; margin-bottom: 10px; margin-left: 10px;margin-top: 10px">
-			<input type="button" id="backup" name="backup" value="BACKUP!"  style="padding: 5px;width: 100px;float: right;cursor: pointer;margin-left: 10px;" onclick="backup();">
-			<input type="button" id="reset" name="reset" value="RESET"  style="padding: 5px;width: 100px;float: right;cursor: pointer;" onclick="reset();">
-		</div>
+		
 	</div>
 	
 
 	<div style="float: left; width: 100%;margin-top: 70px;">
 		<canvas id="canvasPeticiones" style="float: left; height: 250px; width: calc(100% - 350px);margin-left: 25px;">
 		</canvas>
-		<canvas id="canvasResumen" style="float: left; height: 250px; width: 250px;margin-left: 50px; border: 1px solid silver">
+		<canvas id="canvasResumen" style="float: left; height: 250px; width: 250px;margin-left: 50px;">
 		</canvas>
 
 		<div id="leyenda2" style="float: left;width: 100%;" class="legend">
@@ -1055,5 +1053,11 @@
 	<div id="contenido0" style="float: left; width: 100%;margin-top: 15px;"></div>
 	<div id="contenido" style="float: left; width: 100%;margin-bottom: 90px;"></div>
 	<!-- <div id="info-log" style="overflow-y: auto;float: left; width: calc(100% - 4px);height: 80px;position: fixed; border:2px solid black; top: calc(100% - 84px);background-color: GAINSBORO"></div> -->
+	<div id="div-boton" style="overflow-y: auto;float: left; width: 100%;height: 80px;position: fixed; border-top :1px solid black; top: calc(100% - 80px);background-color: white">
+		<div id="info-boton" style="display: none; width: 98%; margin-bottom: 10px; margin-left: 10px;margin-top: 10px">
+			<input type="button" id="backup" name="backup" value="BACKUP!"  style="padding: 5px;width: 100px;float: right;cursor: pointer;margin-left: 10px;" onclick="backup();">
+			<input type="button" id="reset" name="reset" value="RESET"  style="padding: 5px;width: 100px;float: right;cursor: pointer;" onclick="reset();">
+		</div>
+	</div>
 </body>
 </html>
