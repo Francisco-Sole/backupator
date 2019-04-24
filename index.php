@@ -935,13 +935,29 @@
 			}
 			f = hora1 + ":" + min1 + ":" + seg1;
 			console.log(f,"-Generacion ZIP TODO");
-			window.open("bajaZip.php");
+			//window.open("bajaZip.php");
 			// $.ajax({
 			// 	url: 'bajaZip.php',
 			// 	success: function (data) {
 
 			// 	}
 			// });	
+
+			$.ajax({
+				url: 'bajaZip.php',
+				method: 'GET',
+				xhrFields: {
+					responseType: 'blob'
+				},
+				success: function (data) {
+					var a = document.createElement('a');
+					var url = window.URL.createObjectURL(data);
+					a.href = url;
+					a.download = 'myfile.ZIP';
+					a.click();
+					window.URL.revokeObjectURL(url);
+				}
+			});
 		}
 
 		//limpiara las carpetas de trabajo.
@@ -952,6 +968,11 @@
 					console.log("Borrado con exito...");
 				}
 			});	
+		}
+
+		//funcion que recive como parametro la accion que el controlador llevara a cabo.
+		function launch(task){
+
 		}
 		
 		$(document).ready(function() {
@@ -979,13 +1000,13 @@
 				$(this).hide();
 				$("#btn_menu_close").show();
 				var html = "<div>";
-				html += "<div id_menu='0' class='selectable'>Configurar conexión</div>";
-				html += "<div id_menu='1' class='selectable'>Configuración general</div>";
-				html += "<div id_menu='2' class='selectable'>Configuración de graficos</div>";
-				html += "<div id_menu='3' class='selectable'>Densidad de visual</div>";
-				html += "<div id_menu='4' class='selectable'>LOG</div>";
+				html += "<div id_menu='0' id='conf_con' class='selectable itemMenu'>Configurar conexión</div>";
+				html += "<div id_menu='1' id='conf_main' class='selectable itemMenu'>Configuración general</div>";
+				html += "<div id_menu='2' id='conf_graph' class='selectable itemMenu'>Configuración de graficos</div>";
+				html += "<div id_menu='3' id='conf_eye' class='selectable itemMenu'>Densidad de visual</div>";
+				html += "<div id_menu='4' id='conf_log' class='selectable itemMenu'>LOG</div>";
 				html += "<div class='estetico'><hr></div>";
-				html += "<div id_menu='5' class='selectable'>Idioma</div>";
+				html += "<div id_menu='5' id='conf_lang' class='selectable itemMenu'>Idioma</div>";
 				html += "</div>";
 				$("#btn_menu_opciones").html(html);
 				$("#btn_menu_opciones").show("blind");
@@ -995,9 +1016,15 @@
 				$(this).hide();
 				$("#btn_menu").show();
 				$("#btn_menu_opciones").hide("blind");
-			})
-		});
+			});
 
+			$(".itemMenu").each(function(index, el) {
+				var idd = $(el).attr("id_menu");
+				$(el).click(function(event) {
+					launch(idd);
+				});				
+			});
+		});
 	</script>
 
 	<div id="info-cargando" style="display: block;position: fixed;width: 100%; height: 100%; font-weight: 900;background-color: rgba(0,0,0,0.3); z-index: 9999;">
@@ -1053,7 +1080,7 @@
 	<div id="contenido0" style="float: left; width: 100%;margin-top: 15px;"></div>
 	<div id="contenido" style="float: left; width: 100%;margin-bottom: 90px;"></div>
 	<!-- <div id="info-log" style="overflow-y: auto;float: left; width: calc(100% - 4px);height: 80px;position: fixed; border:2px solid black; top: calc(100% - 84px);background-color: GAINSBORO"></div> -->
-	<div id="div-boton" style="overflow-y: auto;float: left; width: 100%;height: 80px;position: fixed; border-top :1px solid black; top: calc(100% - 80px);background-color: white">
+	<div id="div-boton" style="overflow-y: auto;float: left; width: 100%;height: 80px;position: fixed; border-top :1px solid black; top: calc(100% - 80px);background-color: white;box-shadow: 1px -3px 15px #000;-webkit-box-shadow: 1px -3px 15px #000;-moz-box-shadow: 1px -3px 15px #000;">
 		<div id="info-boton" style="display: none; width: 98%; margin-bottom: 10px; margin-left: 10px;margin-top: 10px">
 			<input type="button" id="backup" name="backup" value="BACKUP!"  style="padding: 5px;width: 100px;float: right;cursor: pointer;margin-left: 10px;" onclick="backup();">
 			<input type="button" id="reset" name="reset" value="RESET"  style="padding: 5px;width: 100px;float: right;cursor: pointer;" onclick="reset();">
