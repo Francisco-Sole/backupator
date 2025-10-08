@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 require "config.php";
 
 $mysqli = new mysqli($host_C, $usuario_C, $pasword_C, $nombreDeBaseDeDatos_C);
@@ -14,58 +14,57 @@ $indice = $_GET["indice"];
 
 set_time_limit(-1);
 
-$hoy = date(" Y-m-d H.i.s"); 
-$fecha = date("Y-m-d"); 
-$path = "BACKUP ".$fecha;
+$hoy = date(" Y-m-d H.i.s");
+$fecha = date("Y-m-d");
+$path = "BACKUP " . $fecha;
 $ppath = $path;
-if(!is_dir($path)){
+if (!is_dir($path)) {
 	mkdir($path);
 }
 
 $path2 = $tabla;
-$path = $path."/".$path2;
+$path = $path . "/" . $path2;
 
-if(!is_dir($path)){
+if (!is_dir($path)) {
 	mkdir($path);
 }
 
 $script = "";
 
-$nombre_archivo = "$path/$tabla " . ($current+1000); 
-$numArchivo++;
+$nombre_archivo = "$path/$tabla " . ($current + 1000);
 
-$consulta = "select * from $tabla limit ". $current ." , ". 1000;
-$result = mysqli_query($mysqli,$consulta);
-$script .= "SET FOREIGN_KEY_CHECKS=0;\nINSERT INTO `".$tabla."` VALUES ";
+$consulta = "select * from $tabla limit " . $current . " , " . 1000;
+$result = mysqli_query($mysqli, $consulta);
+$script .= "SET FOREIGN_KEY_CHECKS=0;\nINSERT INTO `" . $tabla . "` VALUES ";
 
-while ($rows = mysqli_fetch_row($result)){
-	$script .= "(";			
+while ($rows = mysqli_fetch_row($result)) {
+	$script .= "(";
 	$index = 1;
 	foreach ($rows as $value) {
 		$value = str_replace("'", "\'", $value);
 		if ($index == 1) {
-			$script .= "'$value'";			
-		}else{
-			$script .= ",'$value'";			
+			$script .= "'$value'";
+		} else {
+			$script .= ",'$value'";
 		}
 		$index++;
 	}
-	$script .= "),\n";			
+	$script .= "),\n";
 }
 
-$script = substr($script, 0,-2);
-$script .= "\n";	
+$script = substr($script, 0, -2);
+$script .= "\n";
 
 $zip = new ZipArchive;
-$res = $zip->open($nombre_archivo.".zip", ZipArchive::CREATE);
+$res = $zip->open($nombre_archivo . ".zip", ZipArchive::CREATE);
 if ($res === TRUE) {
-    $zip->addFromString($tabla.($current+1000).".sql", $script);
-    $zip->close();
-} 
+	$zip->addFromString($tabla . ($current + 1000) . ".sql", $script);
+	$zip->close();
+}
 
 $response["tabla"] = $tabla;
 $response["count"] = $total_rows;
-$response["current"] = $current+1000;
+$response["current"] = $current + 1000;
 $response["variable"] = $variable;
 $response["indice"] = $indice;
 //$response["consulta"] = $consulta;

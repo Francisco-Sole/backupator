@@ -5,21 +5,30 @@ Work Path
 --> DDL
 --> ZIP
 */
-$fecha = date("Y-m-d"); 
-$path = "BACKUP ". $fecha;
+$fecha = date("Y-m-d");
+$path = "BACKUP " . $fecha;
+try {
+	if (!is_dir($path)) {
+		throw new Exception("No existe la carpeta de backup");
+	}
+} catch (Exception $e) {
+	echo json_encode(false);
+	exit;
+}
+
 $ficheros  = scandir($path);
 
 //2 por el 0 y el 1 son '.' y '..'
-for ($i=2; $i < count($ficheros); $i++) { 
-	if (is_dir($path."/".$ficheros[$i])) {
-		$ficheros2  = scandir($path."/".$ficheros[$i]);
-		for ($ii=2; $ii < count($ficheros2); $ii++) { 
-			unlink($path."/".$ficheros[$i]."/".$ficheros2[$ii]);		
+for ($i = 2; $i < count($ficheros); $i++) {
+	if (is_dir($path . "/" . $ficheros[$i])) {
+		$ficheros2  = scandir($path . "/" . $ficheros[$i]);
+		for ($ii = 2; $ii < count($ficheros2); $ii++) {
+			unlink($path . "/" . $ficheros[$i] . "/" . $ficheros2[$ii]);
 		}
-		rmdir($path."/".$ficheros[$i]);
-	}else{
-		unlink($path."/".$ficheros[$i]);		
-	}	
+		rmdir($path . "/" . $ficheros[$i]);
+	} else {
+		unlink($path . "/" . $ficheros[$i]);
+	}
 }
 //borramos la carpeta del backup
 rmdir($path);
@@ -29,33 +38,33 @@ $path = "DDL";
 $ficheros  = scandir($path);
 
 //2 por el 0 y el 1 son '.' y '..'
-for ($i=2; $i < count($ficheros); $i++) { 
-	if (is_dir($path."/".$ficheros[$i])) {
-		$ficheros2  = scandir($path."/".$ficheros[$i]);
-		for ($ii=2; $ii < count($ficheros2); $ii++) { 
-			unlink($path."/".$ficheros[$i]."/".$ficheros2[$ii]);		
+for ($i = 2; $i < count($ficheros); $i++) {
+	if (is_dir($path . "/" . $ficheros[$i])) {
+		$ficheros2  = scandir($path . "/" . $ficheros[$i]);
+		for ($ii = 2; $ii < count($ficheros2); $ii++) {
+			unlink($path . "/" . $ficheros[$i] . "/" . $ficheros2[$ii]);
 		}
-		rmdir($path."/".$ficheros[$i]);
-	}else{
-		unlink($path."/".$ficheros[$i]);		
-	}	
+		rmdir($path . "/" . $ficheros[$i]);
+	} else {
+		unlink($path . "/" . $ficheros[$i]);
+	}
 }
 
 
-$path = "ZIP";
+$path = "./ZIP";
 $ficheros  = scandir($path);
 
 //2 por el 0 y el 1 son '.' y '..'
-for ($i=2; $i < count($ficheros); $i++) { 
-	if (is_dir($path."/".$ficheros[$i])) {
-		$ficheros2  = scandir($path."/".$ficheros[$i]);
-		for ($ii=2; $ii < count($ficheros2); $ii++) { 
-			unlink($path."/".$ficheros[$i]."/".$ficheros2[$ii]);		
+for ($i = 2; $i < count($ficheros); $i++) {
+	if (is_dir($path . "/" . $ficheros[$i])) {
+		$ficheros2  = scandir($path . "/" . $ficheros[$i]);
+		for ($ii = 2; $ii < count($ficheros2); $ii++) {
+			unlink($path . "/" . $ficheros[$i] . "/" . $ficheros2[$ii]);
 		}
-		rmdir($path."/".$ficheros[$i]);
-	}else{
-		unlink($path."/".$ficheros[$i]);		
-	}	
+		rmdir($path . "/" . $ficheros[$i]);
+	} else {
+		unlink($path . "/" . $ficheros[$i]);
+	}
 }
 
 echo json_encode(true);

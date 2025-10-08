@@ -13,35 +13,33 @@ $tabla = $_GET["tabla"];
 set_time_limit(-1);
 
 //$hoy = date(" Y-m-d H.i.s"); 
-$fecha = date("Y-m-d"); 
+$fecha = date("Y-m-d");
 $path = "DDL/";
-if(!is_dir($path)){
+if (!is_dir($path)) {
 	mkdir($path);
 }
 
 $path2 = "structure";
-$path = $path."/".$path2;
+$path = $path . "/" . $path2;
 
-if(!is_dir($path)){
+if (!is_dir($path)) {
 	mkdir($path);
 }
 
 $script = "";
 
-$nombre_archivo = "$path/$tabla.sql"; 
-$numArchivo++;
+$nombre_archivo = "$path/$tabla.sql";
 
 $consulta = "SHOW CREATE TABLE $tabla";
 
-$result = mysqli_query($mysqli,$consulta);
+$result = mysqli_query($mysqli, $consulta);
 
 
-while ($rows = mysqli_fetch_row($result)){
-	$script =  $rows[1];			
+while ($rows = mysqli_fetch_row($result)) {
+	$script =  $rows[1];
 }
 
-if($archivo = fopen($nombre_archivo, "a"))
-{
+if ($archivo = fopen($nombre_archivo, "a")) {
 	fwrite($archivo, $script);
 	fclose($archivo);
 }
