@@ -99,6 +99,17 @@ $pasword_C = "password";
 $nombreDeBaseDeDatos_C = "midatabase";
 ?>
 ```
+
+Ademas se debe modificar el archivo ```php.ini```
+
+buscar la linea:
+```bash
+;extension=zip
+```
+y descomentarla (quitar la ```;```).
+
+> Se debe reiniciar el servicio para aplicar los cambios.
+
 ## Modo CLI: ejecutar scripts PHP manualmente o con cron.
 
 Exportar procedimientos:
